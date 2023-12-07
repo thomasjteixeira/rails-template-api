@@ -25,6 +25,9 @@ module RailsTemplateApi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    # Custom directories with classes and modules you want to be autoloadable.
+    config.eager_load_paths << Rails.root.join('lib')
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -32,6 +35,16 @@ module RailsTemplateApi
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.generators do |g|
+      g.test_framework :rspec, fixture: true
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
+      g.view_specs false
+      g.helper_specs false
+      g.stylesheets false
+      g.javascripts false
+      g.helper false
+    end
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
